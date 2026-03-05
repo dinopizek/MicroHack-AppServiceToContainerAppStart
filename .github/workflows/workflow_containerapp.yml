@@ -26,3 +26,9 @@ jobs:
       
     - name: Build with dotnet
       run: dotnet build --no-restore
+
+    - name: Build and Push Image
+      run: |
+        az acr login --name acrgewemicrohacklab01 --username ${{ secrets.ACR_USERNAME }} --password ${{ secrets.ACR_PASSWORD }} &&
+        docker build -t acrgewemicrohacklab01-d9awcehhgvdsbafm.azurecr.io/microhackapp:1 -f Dockerfile . &&
+        docker push acrgewemicrohacklab01-d9awcehhgvdsbafm.azurecr.io/microhackapp:1
